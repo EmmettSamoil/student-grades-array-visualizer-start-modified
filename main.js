@@ -9,6 +9,7 @@ cnv.height = 600;
 // Global Variables
 let grades = [60, 70, 45, 20, 40, 90, 100, 30, 45, 75, 40, 80];
 let max = 100; // grade values should be b/t 0 and max
+let total = 0;
 
 // Main Program Loop
 requestAnimationFrame(draw);
@@ -49,33 +50,50 @@ function mainMenu() {
 
     // Take action based on menu selection
     if (selection == 'first40') {
-        // Set the grade of the first student to 40.
+        grades[0] = 40;
         outputEl.innerHTML = 'First grade to 40';
     } else if (selection == 'last50') {
-        // Set the grade of the last student to 50. 
+        grades[11] = 50;
         outputEl.innerHTML = 'Last grade to 50';
     } else if (selection == 'random100') {
         // Set the grade of a random student to 100.
         outputEl.innerHTML = 'Random grade to 100';
     } else if (selection == 'addRandom') {
-        // Add a random grade between 0 and 100 to the end of the array.
+        grades.push(Math.random() * 100);
         outputEl.innerHTML = 'Add random grade';
     } else if (selection == 'removeLast') {
-        // Remove the last grade.
+        grades.pop();
         outputEl.innerHTML = 'Remove the last grade';
     } else if (selection == 'count50') {
-        // Count how many grades are below 50.  Output the result.
-        outputEl.innerHTML = 'Count grades below 50';
+       for (i = 0; i < grades.length; i++) {
+             if (grades[i] < 50) {
+                total += 1;
+            }
+            outputEl.innerHTML = total;
+      }
     } else if (selection == 'change50') {
-        // Change all grades that are below 50 to be equal to 50.
+        for (i = 0; i < grades.length; i++) {
+            if (grades[i] < 50) {
+               grades[i] = 50;
+           }
         outputEl.innerHTML = 'Change low grades to 50';
+        }
     } else if (selection == 'increase10') {
-        // Increase each grade by 10%.
+        for (i = 0; i < grades.length; i++) {
+            grades[i] += 10;
+        }
         outputEl.innerHTML = 'Increase all grades by 10%';
     } else if (selection == 'decrease10') {
-        // Decrease each grade by 10%.
+        for (i = 0; i < grades.length; i++) {
+            grades[i] -= 10;
+        }
         outputEl.innerHTML = 'Decrease all grades by 10%';
     } else if (selection == 'remove50') {
+        for (i = 0; i < grades.length; i++) {
+            if (grades[i] < 50) {
+               grades.splice(i, 1)
+           }
+     }
         // Remove all grades that are below 50.
         outputEl.innerHTML = 'Remove grades below 50';
     } 
